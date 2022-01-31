@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/StudioProjects/CovidTracking/app/src/main/res/drawable/edittext_bg.xml" value="0.1195" />
         <entry key="..\:/StudioProjects/CovidTracking/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/StudioProjects/CovidTracking/app/src/main/res/layout/activity_new_user.xml" value="0.3415929203539823" />
+        <entry key="..\:/StudioProjects/CovidTracking/app/src/main/res/layout/editext_background.xml" value="0.2421875" />
       </map>
     </option>
   </component>
