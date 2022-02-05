@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     Button btn_login;
     String str_username,str_password;
     Activity activity;
+    Boolean btnChecker=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,30 +35,52 @@ public class MainActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                str_password=edt_password.getText().toString().trim();
+
                 str_username=edt_username.getText().toString().trim();
-                if (credsValidations(str_username,str_password)){
-                    //to the homepage // need to bring the usertype.
-                    // admin and user different screens
+
+                if (btnChecker){
+                    if (getandVerifyOTP())
+                    startActivity(new Intent(activity,AppMain.class));
                 }
             }
         });
 
-        tv_register.setOnClickListener(new View.OnClickListener() {
+        edt_username.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View view) {
-               startActivity(new Intent(activity,NewUser.class));
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length()==10){
+                    btnChecker=true;
+                    btn_login.setAlpha(1.0f);
+                    btn_login.setClickable(true);
+                }
+                else{
+                    btnChecker=false;
+                    btn_login.setAlpha(0.5f);
+                    btn_login.setClickable(false);
+                }
             }
         });
     }
 
-    private boolean credsValidations(String str_username, String str_password) {
+    private boolean getandVerifyOTP() {
+
+
+        return true;
+    }
+
+    private boolean credsValidations(String str_username) {
         if (Global.isNull(str_username)){
             Global.showToast(activity,"please enter username",1);
-            return false;
-        }
-        if(Global.isNull(str_password)){
-            Global.showToast(activity,"please enter password",1);
             return false;
         }
         return true;
@@ -63,9 +88,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void initUI() {
         tv_register=findViewById(R.id.tv_register);
-        edt_username=findViewById(R.id.edt_username);
+        edt_username=findViewById(R.id.edt_mobile);
         edt_password=findViewById(R.id.edt_password);
         btn_login=findViewById(R.id.btn_login);
+        btnChecker=false;
+        btn_login.setAlpha(0.5f);
+        btn_login.setClickable(false);
         activity=this;
     }
 }
