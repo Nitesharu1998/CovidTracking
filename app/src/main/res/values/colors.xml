@@ -11,5 +11,6 @@
     <color name="transparent">#00000000</color>
     <color name="link_dark_blue">#02217C</color>
     <color name="light_black">#3E4A3D</color>
+    <color name="tab_active_bg">#388e3c</color>
     <color name="app_general_grey">#b0b0b0</color>
 </resources>
