@@ -5,11 +5,29 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.UserStatusFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:gravity="center"
+<!--helpline number-->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="this us user status" />
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_margin="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Helpline Numbers"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="15dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcl_numbers"
+            android:padding="4dp"
+            tools:listitem="@layout/helpline_view"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
 
 </FrameLayout>

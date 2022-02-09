@@ -88,6 +88,9 @@ public class AppMain extends AppCompatActivity {
             iv_contacts.setImageResource(R.drawable.recents_inactive);
 
             iv_status.setBackgroundResource(R.drawable.active_tab);
+            iv_updates.setBackgroundResource(R.drawable.inactive_tab);
+            iv_certs.setBackgroundResource(R.drawable.inactive_tab);
+            iv_contacts.setBackgroundResource(R.drawable.inactive_tab);
 
         }
         if (Checker == 1) {
@@ -96,6 +99,11 @@ public class AppMain extends AppCompatActivity {
             iv_updates.setImageResource(R.drawable.covgraph_active);
             iv_certs.setImageResource(R.drawable.cert_inactive);
             iv_contacts.setImageResource(R.drawable.recents_inactive);
+
+            iv_status.setBackgroundResource(R.drawable.inactive_tab);
+            iv_updates.setBackgroundResource(R.drawable.active_tab);
+            iv_certs.setBackgroundResource(R.drawable.inactive_tab);
+            iv_contacts.setBackgroundResource(R.drawable.inactive_tab);
         }
         if (Checker == 2) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frm_tabframe, new RecentContactsFragment()).commit();
@@ -103,13 +111,24 @@ public class AppMain extends AppCompatActivity {
             iv_updates.setImageResource(R.drawable.covgraph_inactive);
             iv_certs.setImageResource(R.drawable.cert_inactive);
             iv_contacts.setImageResource(R.drawable.recents_active);
+
+            iv_status.setBackgroundResource(R.drawable.inactive_tab);
+            iv_updates.setBackgroundResource(R.drawable.inactive_tab);
+            iv_certs.setBackgroundResource(R.drawable.inactive_tab);
+            iv_contacts.setBackgroundResource(R.drawable.active_tab);
         }
         if (Checker == 3) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frm_tabframe, new CertsFragment()).commit();
             iv_status.setImageResource(R.drawable.heart_inactive);
             iv_updates.setImageResource(R.drawable.covgraph_inactive);
             iv_certs.setImageResource(R.drawable.cert_active);
-            iv_contacts.setImageResource(R.drawable.recents_inactive);        }
+            iv_contacts.setImageResource(R.drawable.recents_inactive);
+
+            iv_status.setBackgroundResource(R.drawable.inactive_tab);
+            iv_updates.setBackgroundResource(R.drawable.inactive_tab);
+            iv_certs.setBackgroundResource(R.drawable.active_tab);
+            iv_contacts.setBackgroundResource(R.drawable.inactive_tab);
+        }
     }
 
     private void initUI() {
