@@ -2,4 +2,6 @@
     <string name="app_name">CovidTracking</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="PLEASE_TAKE_ASSESSMENT">Please take the updated self assessment</string>
+    <string name="ASSESSMENT_REQUEST">To help India contain the pandemic we have updated the self assessment. Your responses will help our Doctors and medical researchers work more effectively. Help Aarogyasetu help India. Main Surakshit, Hum Surakshit, Bharat Surakshit.</string>
 </resources>
