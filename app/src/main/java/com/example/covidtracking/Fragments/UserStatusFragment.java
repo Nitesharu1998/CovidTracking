@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.example.covidtracking.Adapters.HelplineAdapter;
 import com.example.covidtracking.ModelClasses.HelplineModel;
 import com.example.covidtracking.R;
+import com.example.covidtracking.activities.AssessmentActivity;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
@@ -60,7 +61,7 @@ public class UserStatusFragment extends Fragment {
         btn_proceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(),AssessmentActivity.class));
+                startActivity(new Intent(getActivity(), AssessmentActivity.class));
                 bottomDialog.dismiss();
             }
         });
