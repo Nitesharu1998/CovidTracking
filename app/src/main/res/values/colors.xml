@@ -15,4 +15,7 @@
     <color name="tab_inactive_bg">#ffffff</color>
     <color name="app_general_grey">#b0b0b0</color>
     <color name="support_tab_bg">#87b4fd</color>
+    <color name="red">#F71100</color>
+    <color name="green">#258800</color>
+    <color name="gray">#414141</color>
 </resources>
