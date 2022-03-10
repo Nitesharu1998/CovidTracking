@@ -9,50 +9,56 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.covidtracking.ModelClasses.StatewiseDataModel;
+import com.example.covidtracking.Fragments.CovUpdatesFragment;
+import com.example.covidtracking.ModelClasses.CountrywiseDataModel;
 import com.example.covidtracking.R;
 
+import java.text.NumberFormat;
 import java.util.List;
 
 public class RecyclerViewAdapterData extends RecyclerView.Adapter<RecyclerViewAdapterData.ViewHolder> {
 
-    private List<StatewiseDataModel.DataDTO.RegionalDTO> regionalDTOS;
-    private Activity context;
+    int caseTypes = 1;
+    List<CountrywiseDataModel> modelClassList;
+    Context context;
 
-    public RecyclerViewAdapterData(List<StatewiseDataModel.DataDTO.RegionalDTO> regionalDTOS, Activity context) {
-        this.regionalDTOS = regionalDTOS;
-        this.context = context;
+    public RecyclerViewAdapterData(List<CountrywiseDataModel> modelClassList, CovUpdatesFragment fragment) {
+        this.modelClassList = modelClassList;
+
     }
 
-    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(context).inflate(R.layout.statedetails_list, parent, false);
-
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View view = inflater.inflate(R.layout.layout_item, parent, false);
         return new ViewHolder(view);
     }
 
-    @SuppressLint("SetTextI18n")
+
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
 
-        StatewiseDataModel.DataDTO.RegionalDTO regionalDTO = regionalDTOS.get(position);
-        holder.tv_state.setText(regionalDTO.getLoc() + "");
-        holder.tv_recovered.setText(regionalDTO.getDischarged() + "");
-        holder.tv_deceased.setText(regionalDTO.getDeaths() + "");
-        holder.tv_confirmed.setText(regionalDTO.getTotalConfirmed() + "");
+        CountrywiseDataModel countrywiseDataModel = modelClassList.get(position);
+        if (caseTypes == 1) {
+            holder.cases.setText(NumberFormat.getInstance().format(Integer.parseInt(countrywiseDataModel.getCases())));
+        } else if (caseTypes == 2) {
+            holder.cases.setText(NumberFormat.getInstance().format(Integer.parseInt(countrywiseDataModel.getRecovered())));
+        } else if (caseTypes == 3) {
+            holder.cases.setText(NumberFormat.getInstance().format(Integer.parseInt(countrywiseDataModel.getDeaths())));
+        } else {
+            holder.cases.setText(NumberFormat.getInstance().format(Integer.parseInt(countrywiseDataModel.getActive())));
+        }
 
-        int activeData = regionalDTO.getTotalConfirmed() - regionalDTO.getDischarged() - regionalDTO.getDeaths();
-        holder.tv_active.setText(activeData + "");
+        holder.country.setText(countrywiseDataModel.getCountry());
+
     }
 
     @Override
     public int getItemCount() {
-        return regionalDTOS.size();
+        return modelClassList.size();
     }
 
     @Override
@@ -62,19 +68,28 @@ public class RecyclerViewAdapterData extends RecyclerView.Adapter<RecyclerViewAd
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tv_state, tv_active, tv_recovered, txt_recovered, tv_deceased, txt_deceased, tv_confirmed, txt_confirmed;
+        TextView cases, country;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
-            tv_state = itemView.findViewById(R.id.tv_state);
-            tv_active = itemView.findViewById(R.id.tv_active);
-            tv_recovered = itemView.findViewById(R.id.tv_recovered);
 
-            tv_deceased = itemView.findViewById(R.id.tv_deceased);
-
-            tv_confirmed = itemView.findViewById(R.id.tv_confirmed);
-
-
+            cases = itemView.findViewById(R.id.countrycase);
+            country = itemView.findViewById(R.id.countryname);
         }
+    }
+
+
+    public void filter(String item) {
+        if (item.equals("Cases")) {
+            caseTypes = 1;
+        } else if (item.equals("Recovered")) {
+            caseTypes = 2;
+        } else if (item.equals("Deaths")) {
+            caseTypes = 3;
+        } else {
+            caseTypes = 4;
+        }
+
+        notifyDataSetChanged();
     }
 }

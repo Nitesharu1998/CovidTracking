@@ -18,4 +18,10 @@
     <color name="red">#F71100</color>
     <color name="green">#258800</color>
     <color name="gray">#414141</color>
+
+    <color name="yellow">#FFB701</color>
+    <color name="blue">#38ACDD</color>
+    <color name="card_bg">#A8A7A7</color>
+    <color name="relative_bg">#2b2e4a</color>
+    <color name="countycode_bg">#BDBCBC</color>
 </resources>

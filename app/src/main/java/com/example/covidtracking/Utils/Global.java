@@ -37,6 +37,7 @@ public class Global {
         progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         return progress;
     }
+
     public static boolean checkEqualIgnoreCase(String str1, String str2) {
         return !isNull(str1) && !isNull(str2) && str1.equalsIgnoreCase(str2);
     }
