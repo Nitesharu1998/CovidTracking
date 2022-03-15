@@ -56,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
-                if (Global.checkEqualIgnoreCase(btn_login.getText().toString(),"Validate OTP")){
+                testmessage();
+                /*if (Global.checkEqualIgnoreCase(btn_login.getText().toString(),"Validate OTP")){
                     str_username = edt_mobile.getText().toString().trim();
 
                     if (btnChecker) {
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                     if (Global.checkEqualIgnoreCase(newgeneratedOTP,edt_otp.getText().toString())){
                         startActivity(new Intent(activity,AppMain.class));
                     }
-                }
+                }*/
 
             }
         });
@@ -148,7 +149,18 @@ public class MainActivity extends AppCompatActivity {
             newgeneratedOTP=matcher.group(0);
             edt_otp.setVisibility(View.VISIBLE);
             btn_login.setText("Login");
-            smartUserConsent();
+
+        }
+    }
+
+    private void testmessage() {
+        try {
+            android.telephony.SmsManager smsManager = android.telephony.SmsManager.getDefault();
+            smsManager.sendTextMessage("8451079482", null, "Your OTP is generated", null, null);
+            Global.showToast(activity, "Message Sent",0);
+        } catch (Exception ex) {
+            Global.showToast(activity, ex.getMessage(),0);
+            ex.printStackTrace();
         }
     }
 
