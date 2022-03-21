@@ -15,4 +15,13 @@
     <color name="tab_inactive_bg">#ffffff</color>
     <color name="app_general_grey">#b0b0b0</color>
     <color name="support_tab_bg">#87b4fd</color>
+    <color name="red">#F71100</color>
+    <color name="green">#258800</color>
+    <color name="gray">#414141</color>
+
+    <color name="yellow">#FFB701</color>
+    <color name="blue">#38ACDD</color>
+    <color name="card_bg">#A8A7A7</color>
+    <color name="relative_bg">#2b2e4a</color>
+    <color name="countycode_bg">#BDBCBC</color>
 </resources>
