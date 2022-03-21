@@ -7,32 +7,28 @@
         <entry key="..\:/StudioProjects/CovidTracking/app/src/main/res/drawable/chat_bg.xml" value="0.124" />
         <entry key="..\:/StudioProjects/CovidTracking/app/src/main/res/drawable/edittext_bg.xml" value="0.1195" />
         <entry key="..\:/StudioProjects/CovidTracking/app/src/main/res/layout/activity_app_main.xml" value="0.1962962962962963" />
-        <entry key="..\:/StudioProjects/CovidTracking/app/src/main/res/layout/activity_assessment.xml" value="0.32371794871794873" />
+        <entry key="..\:/StudioProjects/CovidTracking/app/src/main/res/layout/activity_assessment.xml" value="0.1" />
         <entry key="..\:/StudioProjects/CovidTracking/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/StudioProjects/CovidTracking/app/src/main/res/layout/activity_new_user.xml" value="0.3415929203539823" />
+        <entry key="..\:/StudioProjects/CovidTracking/app/src/main/res/layout/activity_welcome.xml" value="0.19880290722530997" />
+        <entry key="..\:/StudioProjects/CovidTracking/app/src/main/res/layout/appbar_layout.xml" value="0.19880290722530997" />
         <entry key="..\:/StudioProjects/CovidTracking/app/src/main/res/layout/chat_bg.xml" value="0.2421875" />
         <entry key="..\:/StudioProjects/CovidTracking/app/src/main/res/layout/editext_background.xml" value="0.2421875" />
+        <entry key="..\:/StudioProjects/CovidTracking/app/src/main/res/layout/fragment_covupdates.xml" value="0.19880290722530997" />
         <entry key="..\:/StudioProjects/CovidTracking/app/src/main/res/layout/fragment_userstatus.xml" value="0.11944444444444445" />
         <entry key="..\:/StudioProjects/CovidTracking/app/src/main/res/layout/take_assessment.xml" value="0.2" />
-        <entry key="..\:/Users/T0763/.gradle/caches/transforms-3/d6dbf61876661fe5212f4c55fde51b3c/transformed/ccp-2.6.0/res/drawable/ccp_ic_arrow_drop_down.xml" value="0.1215" />
         <entry key="..\:/Users/T0763/StudioProjects/CovidTracking/app/src/main/res/drawable/active_tab.xml" value="0.1285" />
         <entry key="..\:/Users/T0763/StudioProjects/CovidTracking/app/src/main/res/drawable/appbar_bg.xml" value="0.19" />
         <entry key="..\:/Users/T0763/StudioProjects/CovidTracking/app/src/main/res/drawable/bg_shadow.xml" value="0.1285" />
         <entry key="..\:/Users/T0763/StudioProjects/CovidTracking/app/src/main/res/drawable/edittext_bg.xml" value="0.1" />
-        <entry key="..\:/Users/T0763/StudioProjects/CovidTracking/app/src/main/res/drawable/realtivebg.xml" value="0.122" />
         <entry key="..\:/Users/T0763/StudioProjects/CovidTracking/app/src/main/res/drawable/tab_bg.xml" value="0.117" />
         <entry key="..\:/Users/T0763/StudioProjects/CovidTracking/app/src/main/res/layout-v28/appbar_layout.xml" value="0.2609375" />
         <entry key="..\:/Users/T0763/StudioProjects/CovidTracking/app/src/main/res/layout/activity_app_main.xml" value="0.25" />
-        <entry key="..\:/Users/T0763/StudioProjects/CovidTracking/app/src/main/res/layout/activity_assessment.xml" value="0.2604166666666667" />
         <entry key="..\:/Users/T0763/StudioProjects/CovidTracking/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/T0763/StudioProjects/CovidTracking/app/src/main/res/layout/activity_new_user.xml" value="0.22" />
         <entry key="..\:/Users/T0763/StudioProjects/CovidTracking/app/src/main/res/layout/appbar_layout.xml" value="0.28370786516853935" />
-        <entry key="..\:/Users/T0763/StudioProjects/CovidTracking/app/src/main/res/layout/fragment_certs.xml" value="0.2604166666666667" />
-        <entry key="..\:/Users/T0763/StudioProjects/CovidTracking/app/src/main/res/layout/fragment_covupdates.xml" value="0.14" />
         <entry key="..\:/Users/T0763/StudioProjects/CovidTracking/app/src/main/res/layout/fragment_userstatus.xml" value="0.25677083333333334" />
         <entry key="..\:/Users/T0763/StudioProjects/CovidTracking/app/src/main/res/layout/helpline_view.xml" value="0.33" />
-        <entry key="..\:/Users/T0763/StudioProjects/CovidTracking/app/src/main/res/layout/statedetails_list.xml" value="0.2609375" />
-        <entry key="..\:/Users/T0763/StudioProjects/CovidTracking/app/src/main/res/layout/statedetails_popup.xml" value="0.2" />
       </map>
     </option>
   </component>

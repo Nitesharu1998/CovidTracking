@@ -3,6 +3,8 @@ package com.example.covidtracking.Utils;
 import android.app.Activity;
 import android.widget.EditText;
 
+import com.google.android.material.textfield.TextInputEditText;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

@@ -4,100 +4,81 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:isScrollContainer="true"
     android:layout_marginBottom="20dp"
+    android:orientation="vertical"
     tools:context=".activities.MainActivity">
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="bottom"
-    android:orientation="vertical">
-    <ImageView
-        android:layout_width="214dp"
-        android:layout_height="212dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="100dp"
-        android:src="@drawable/app_logo" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="4dp"
-        android:layout_gravity="bottom"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical">
 
-        android:gravity="bottom">
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:hint="Enter mobile number"
-            app:boxStrokeColor="@color/primaryDarkColor"
-            app:startIconTintMode="screen"
-            app:startIconTint="@color/transparent"
-            app:startIconDrawable="@drawable/phone"
-            android:layout_width="match_parent"
-            app:hintTextColor="@color/black"
-            android:layout_height="wrap_content">
-            <com.google.android.material.textfield.TextInputEditText
-                android:outlineSpotShadowColor="@color/primaryDarkColor"
-                android:inputType="number"
-                android:maxLength="10"
-                android:digits="0123456789"
-                android:id="@+id/edt_mobile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:hint="Enter OTP"
-            app:boxStrokeColor="@color/primaryDarkColor"
-            app:startIconTintMode="screen"
-            app:startIconTint="@color/transparent"
-            app:startIconDrawable="@drawable/otp"
-            android:layout_width="match_parent"
-            app:hintTextColor="@color/black"
-            android:visibility="gone"
-            android:layout_height="wrap_content">
-            <com.google.android.material.textfield.TextInputEditText
-                android:outlineSpotShadowColor="@color/primaryDarkColor"
-                android:inputType="number"
-                android:maxLength="10"
-                android:digits="0123456789"
-                android:id="@+id/edt_otp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
+        <ImageView
+            android:layout_width="214dp"
+            android:layout_height="212dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="100dp"
+            android:src="@drawable/app_logo" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_gravity="bottom"
+            android:gravity="bottom"
+            android:orientation="vertical"
+
+            android:padding="4dp">
+
+            <EditText
+                style="material"
+                android:id="@+id/edt_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:digits="0123456789"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:background="@drawable/edittext_bg"
+                android:drawableStart="@drawable/phone"
+                android:drawablePadding="4dp"
+                android:hint="Enter mobile number"
+                android:inputType="number"
+                android:maxLength="10"
+                android:outlineSpotShadowColor="@color/primaryDarkColor" />
+
+
+            <EditText
+                android:id="@+id/edt_otp"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/edittext_bg"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:digits="0123456789"
+                android:drawablePadding="4dp"
+                android:drawableStart="@drawable/otp"
+                android:hint="Enter OTP"
+                android:inputType="number"
+                android:maxLength="6"
+                android:outlineSpotShadowColor="@color/primaryDarkColor" />
+
 
             <Button
                 android:id="@+id/btn_login"
                 style="@style/Widget.MaterialComponents.FloatingActionButton"
-                android:layout_marginTop="5dp"
                 android:layout_width="200dp"
                 android:layout_height="55dp"
                 android:layout_gravity="center"
-                android:scrollbarSize="14dp"
-                android:clickable="false"
-                android:textColor="@color/black"
+                android:layout_marginTop="5dp"
                 android:backgroundTint="@color/primaryColor"
-                android:text="Get OTP"/>
+                android:text="Get OTP"
+                android:textColor="@color/black" />
+
+
         </LinearLayout>
 
-
-
     </LinearLayout>
-
-</LinearLayout>
 
 
 </LinearLayout>

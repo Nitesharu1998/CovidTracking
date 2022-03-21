@@ -1,6 +1,8 @@
 package com.example.covidtracking.activities;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -11,6 +13,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -24,7 +27,13 @@ import com.example.covidtracking.Utils.Validator;
 import com.google.android.gms.auth.api.phone.SmsRetriever;
 import com.google.android.gms.auth.api.phone.SmsRetrieverClient;
 import com.google.android.material.textfield.TextInputEditText;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
+import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -32,15 +41,16 @@ import java.util.regex.Pattern;
 public class MainActivity extends AppCompatActivity {
     private static final int REQ_USER_CONSENT = 200;
     TextView tv_register;
-    TextInputEditText edt_mobile, edt_otp;
+    EditText edt_mobile, edt_otp;
     Button btn_login;
-    String str_username, str_password;
+    String str_mobile, str_password, message;
     Activity activity;
     Boolean btnChecker = false;
     String generatedOtp, checkString, newgeneratedOTP, timestamp, test;
     Random random = new Random();
     Context context;
     SmsBroadCastReceiver smsBroadCastReceiver;
+    ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,47 +66,25 @@ public class MainActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
-                testmessage();
-                /*if (Global.checkEqualIgnoreCase(btn_login.getText().toString(),"Validate OTP")){
-                    str_username = edt_mobile.getText().toString().trim();
-
-                    if (btnChecker) {
-                        getNumber();
+                if (Validator.mobileNoValidation(activity, edt_mobile))
+                    if (Global.checkEqualIgnoreCase(btn_login.getText().toString(), "Get OTP")) {
+                        str_mobile = edt_mobile.getText().toString().trim();
+                        dialog = new ProgressDialog(activity);
+                        dialog.setTitle("Please wait.....");
+                        dialog.show();
+                        GenerateOtp(str_mobile);
+                        smartUserConsent();
+                    }
+                if (Global.checkEqualIgnoreCase(btn_login.getText().toString(), "login")) {
+                    if (Global.checkEqualIgnoreCase(newgeneratedOTP, edt_otp.getText().toString())) {
+                        startActivity(new Intent(activity, AppMain.class));
+                        finish();
                     }
                 }
-                if (Global.checkEqualIgnoreCase(btn_login.getText().toString(),"login")){
-                    if (Global.checkEqualIgnoreCase(newgeneratedOTP,edt_otp.getText().toString())){
-                        startActivity(new Intent(activity,AppMain.class));
-                    }
-                }*/
 
             }
         });
 
-        edt_mobile.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (s.length() == 10) {
-                    btnChecker = true;
-                    btn_login.setAlpha(1.0f);
-                    btn_login.setClickable(true);
-                } else {
-                    btnChecker = false;
-                    btn_login.setAlpha(0.5f);
-                    btn_login.setClickable(false);
-                }
-            }
-        });
     }
 
     private void GenerateOtp(String phone) {
@@ -109,92 +97,84 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private void getNumber() {
-        if (Validator.mobileNoValidation(activity, edt_mobile)) {
-            GenerateOtp(edt_mobile.getText().toString());
-            smartUserConsent();
-        }
+    private void registerBroadcast() {
+        smsBroadCastReceiver = new SmsBroadCastReceiver();
+        smsBroadCastReceiver.smsBroadcastinterface = new SmsBroadCastReceiver.SmsBroadcastinterface() {
+            @Override
+            public void onSuccess(Intent intent) {
+                startActivityForResult(intent, REQ_USER_CONSENT);
+                smartUserConsent();
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+
+        };
+
+        IntentFilter intentFilter = new IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION);
+        activity.registerReceiver(smsBroadCastReceiver, intentFilter);
 
     }
 
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void smartUserConsent() {
-        SmsRetrieverClient client = SmsRetriever.getClient(context);
+        SmsRetrieverClient client = SmsRetriever.getClient(activity);
         client.startSmsUserConsent(null);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==REQ_USER_CONSENT){
-            if ((resultCode==RESULT_OK) && (data !=null)){
-                String message=data.getStringExtra(SmsRetriever.EXTRA_SMS_MESSAGE);
-                btn_login.setText("Validate OTP");
-                getOTP(message);
-            }
-        }
 
+        if (requestCode == REQ_USER_CONSENT&& resultCode==RESULT_OK) {
+            message = data.getStringExtra(SmsRetriever.EXTRA_SMS_MESSAGE);
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+                getOTP(message);
+
+        }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     private void getOTP(String message) {
 
-        Pattern patternOfOtp= Pattern.compile("(|^)\\d{6}");
+        Pattern patternOfOtp = Pattern.compile("(|^)\\d{6}");
         Matcher matcher = patternOfOtp.matcher(message);
-        if (matcher.find()){
-            System.out.println("MATCHER"+matcher.group(0));
-            edt_otp.setText(matcher.group(0));
-            newgeneratedOTP=matcher.group(0);
-            edt_otp.setVisibility(View.VISIBLE);
+        if (matcher.find()) {
             btn_login.setText("Login");
-
+            newgeneratedOTP = matcher.group(0);
+            edt_mobile.setVisibility(View.INVISIBLE);
+            edt_otp.setVisibility(View.VISIBLE);
+            edt_otp.setText(newgeneratedOTP);
         }
     }
 
-    private void testmessage() {
-        try {
-            android.telephony.SmsManager smsManager = android.telephony.SmsManager.getDefault();
-            smsManager.sendTextMessage("8451079482", null, "Your OTP is generated", null, null);
-            Global.showToast(activity, "Message Sent",0);
-        } catch (Exception ex) {
-            Global.showToast(activity, ex.getMessage(),0);
-            ex.printStackTrace();
-        }
-    }
-
-    private void registerBroadcast(){
-        smsBroadCastReceiver = new SmsBroadCastReceiver();
-        smsBroadCastReceiver.smsBroadcastinterface= new SmsBroadCastReceiver.SmsBroadcastinterface() {
-            @Override
-            public void onSuccess(Intent intent) {
-                startActivityForResult(intent,REQ_USER_CONSENT);
-            }
-            @Override
-            public void onFailure() {
-            }
-
-        };
-
-        IntentFilter intentFilter=new IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION);
-        context.registerReceiver(smsBroadCastReceiver,intentFilter);
-
-    }
 
     @Override
     public void onStart() {
         super.onStart();
+
         registerBroadcast();
+
+
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        activity.unregisterReceiver(smsBroadCastReceiver);
+    }
+
+
     private void initUI() {
-        edt_otp=findViewById(R.id.edt_otp);
+        edt_otp = findViewById(R.id.edt_otp);
         edt_mobile = findViewById(R.id.edt_mobile);
+        edt_mobile.setVisibility(View.VISIBLE);
+        edt_otp.setVisibility(View.INVISIBLE);
         btn_login = findViewById(R.id.btn_login);
         btnChecker = false;
-        btn_login.setAlpha(0.5f);
-        btn_login.setClickable(false);
         activity = this;
         context = this.getApplicationContext();
     }
